@@ -1,6 +1,7 @@
 # Blog
 
-Blog project use angular with SEO support.
+Blog project use angular with SEO support.  
+Trello: https://trello.com/b/Ydo9cBkf/blog
 
 ## v1.0
 - [ ] Blog homepage
