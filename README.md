@@ -2,7 +2,7 @@
 
 Blog project use angular with SEO support.
 
-## v1.0.0
+## v1.0
 - [ ] Blog homepage
   - [ ] List Blog
   - [ ] Support pagination
@@ -12,7 +12,7 @@ Blog project use angular with SEO support.
   - [ ] Show content
   - [ ] Show total read
 
-## v2.0.0
+## v2.0
 - [ ] Add Category
 - [ ] Update navbar with category
 - [ ] ......
