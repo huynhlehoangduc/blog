@@ -2,13 +2,14 @@
 - `src`
   - `app`
     - `@core`
-      - `pipes`
-      - `interceptors`
-      - `guards`
-      - `services`
-      - `interfaces`
-      - `utils`
       - `components`
+      - `contants`
+      - `guards`
+      - `interceptors`
+      - `interfaces`
+      - `pipes`
+      - `services`
+      - `utils`
     - `admin`
       - `pages`
         - `page-1`
