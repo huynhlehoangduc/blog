@@ -1,7 +1,7 @@
 # Project structure
 - `src`
   - `app`
-    - `core`
+    - `@core`
       - `pipes`
       - `interceptors`
       - `guards`
@@ -30,7 +30,7 @@
             - `components`
             - `...`
 
-## `core`
+## `@core`
 
 Common code use for everywhere in app, use SCAM (single component angular module)
 
