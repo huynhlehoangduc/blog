@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MaintainComponent } from './pages/maintain/maintain.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
