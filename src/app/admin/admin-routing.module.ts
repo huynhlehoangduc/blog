@@ -7,7 +7,8 @@ const routes: Routes = [
     path: '',
     component: AdminComponent,
     children: [
-      { path: 'post-list', loadChildren: () => import('./pages/blog/pages/post/post-list/post-list.module').then(m => m.PostListModule) }
+      { path: 'post-list', loadChildren: () => import('./pages/blog/pages/post/post-list/post-list.module').then(m => m.PostListModule) },
+      { path: 'post-edit', loadChildren: () => import('./pages/blog/pages/post/post-edit/post-edit.module').then(m => m.PostEditModule) },
     ]
   },
 ];

@@ -1,0 +1,81 @@
+<div class='flex justify-between'>
+  <div>
+    <a routerLink='/admin/post-list'
+       nz-button
+       class='mr-2'
+       nzType='default'>
+      <i nz-icon
+         nzType='unordered-list'
+         nzTheme='outline'></i> List</a>
+  </div>
+  <div>
+    <button nz-button
+            class='mr-2'
+            nzType='default'
+            (click)='saveDraft()'
+            [nzLoading]='isSavingDraft'
+            [disabled]='fm.invalid'
+    >Save draft
+    </button>
+    <button nz-button
+            class='mr-2'
+            nzType='primary'
+            (click)='publish()'
+            [disabled]='fm.invalid'
+            [nzLoading]='isPublishing'>Publish
+    </button>
+    <button nz-button
+            class='mr-2'
+            nzType='primary'
+            [disabled]='fm.invalid'
+            (click)='preview()'>Preview
+    </button>
+  </div>
+</div>
+
+<form [formGroup]='fm'
+      nz-form
+      nzLayout='vertical'>
+  <nz-form-item>
+    <nz-form-label nzFor='title'
+                   nzRequired>Title
+    </nz-form-label>
+    <nz-form-control nzHasFeedback
+                     nzErrorTip='Input is required'>
+      <input nz-input
+             placeholder='Title'
+             formControlName='title' />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzFor='minutesRead'
+                   nzRequired>Minutes Read
+    </nz-form-label>
+    <nz-form-control nzHasFeedback
+                     nzErrorTip='Input is required'>
+      <nz-input-number formControlName='minutesRead'
+                       [nzMin]='1'
+                       [nzMax]='100'
+                       [nzStep]='1'></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzFor='content'
+                   nzRequired>Content
+    </nz-form-label>
+    <nz-form-control nzHasFeedback
+                     nzErrorTip='Input is required'>
+      <input nz-input
+             placeholder='Content'
+             formControlName='content' />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <label nz-checkbox
+             formControlName='publish'>Publish</label>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+{{ fm.value | json }}

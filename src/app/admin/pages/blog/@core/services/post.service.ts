@@ -22,4 +22,8 @@ export class PostService {
   delete(id: string) {
     return this.httpClient.delete(`${environment.apiUrl}/${this.ENDPOINT}/${id}`);
   }
+
+  create(payload, options = {}): Observable<Post> {
+    return this.httpClient.post(`${environment.apiUrl}/${this.ENDPOINT}`, payload, options)
+  }
 }
