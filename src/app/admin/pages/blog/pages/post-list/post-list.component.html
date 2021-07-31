@@ -1,0 +1,48 @@
+<div class='mb-2'>
+  <button nz-button
+          nzSize='default'
+          nzType='primary'
+  >Create Post
+  </button>
+</div>
+
+<nz-table
+  nzShowSizeChanger
+  [nzData]='posts'
+  [nzFrontPagination]='false'
+  [nzLoading]='loading'
+  [nzTotal]='total'
+  [nzPageSize]='pageSize'
+  [nzPageIndex]='pageIndex'
+  (nzQueryParams)='onQueryParamsChange($event)'
+>
+  <thead>
+  <tr>
+    <th nzColumnKey='actions'>Actions</th>
+    <th nzColumnKey='title'
+        [nzSortFn]='true'>title
+    </th>
+    <th nzColumnKey='content'>content</th>
+    <th nzColumnKey='minutesRead'
+        [nzSortFn]='true'>minutesRead
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor='let post of posts'>
+    <td>
+      <button nz-button
+              nzDanger
+              nzShape='circle'
+              (click)='delete(post.id)'
+      >
+        <i nz-icon
+           nzType='delete'></i>
+      </button>
+    </td>
+    <td>{{ post.title }}</td>
+    <td>{{ post.content }}</td>
+    <td>{{ post.minutesRead }}</td>
+  </tr>
+  </tbody>
+</nz-table>
