@@ -8,6 +8,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { DeleteOutline, FileAddOutline } from '@ant-design/icons-angular/icons';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzImageModule } from 'ng-zorro-antd/image';
 
 const icons = [DeleteOutline, FileAddOutline];
 
@@ -22,6 +23,7 @@ const icons = [DeleteOutline, FileAddOutline];
     NzButtonModule,
     NzIconModule.forChild(icons),
     NzPopconfirmModule,
+    NzImageModule,
   ],
 })
 export class PostListModule { }
