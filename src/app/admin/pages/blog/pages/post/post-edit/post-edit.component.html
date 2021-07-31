@@ -1,81 +1,138 @@
-<div class='flex justify-between'>
-  <div>
-    <a routerLink='/admin/post-list'
-       nz-button
-       class='mr-2'
-       nzType='default'>
-      <i nz-icon
-         nzType='unordered-list'
-         nzTheme='outline'></i> List</a>
-  </div>
-  <div>
-    <button nz-button
-            class='mr-2'
-            nzType='default'
-            (click)='saveDraft()'
-            [nzLoading]='isSavingDraft'
-            [disabled]='fm.invalid'
-    >Save draft
-    </button>
-    <button nz-button
-            class='mr-2'
-            nzType='primary'
-            (click)='publish()'
-            [disabled]='fm.invalid'
-            [nzLoading]='isPublishing'>Publish
-    </button>
-    <button nz-button
-            class='mr-2'
-            nzType='primary'
-            [disabled]='fm.invalid'
-            (click)='preview()'>Preview
-    </button>
-  </div>
-</div>
+<nz-spin [nzSpinning]='isSpinning'>
+  <div class='flex justify-between'>
+    <div>
+      <a routerLink='/admin/post-list'
+         nz-button
+         class='mr-2'
+         nzType='default'>
+        <i nz-icon
+           nzType='unordered-list'
+           nzTheme='outline'></i> List</a>
+      <a routerLink='/admin/post-edit'
+         nz-button
+         class='mr-2'
+         nzType='primary'>
+        <i nz-icon
+           nzType='file-add'
+           nzTheme='outline'></i>
+        Create new Post
+      </a>
 
-<form [formGroup]='fm'
-      nz-form
-      nzLayout='vertical'>
-  <nz-form-item>
-    <nz-form-label nzFor='title'
-                   nzRequired>Title
-    </nz-form-label>
-    <nz-form-control nzHasFeedback
-                     nzErrorTip='Input is required'>
-      <input nz-input
-             placeholder='Title'
-             formControlName='title' />
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label nzFor='minutesRead'
-                   nzRequired>Minutes Read
-    </nz-form-label>
-    <nz-form-control nzHasFeedback
-                     nzErrorTip='Input is required'>
-      <nz-input-number formControlName='minutesRead'
-                       [nzMin]='1'
-                       [nzMax]='100'
-                       [nzStep]='1'></nz-input-number>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label nzFor='content'
-                   nzRequired>Content
-    </nz-form-label>
-    <nz-form-control nzHasFeedback
-                     nzErrorTip='Input is required'>
-      <input nz-input
-             placeholder='Content'
-             formControlName='content' />
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-control>
-      <label nz-checkbox
-             formControlName='publish'>Publish</label>
-    </nz-form-control>
-  </nz-form-item>
-</form>
+      <button nz-button
+              class='mr-2'
+              nzDanger
+              [nzLoading]='isDeletingPost'
+              *ngIf='post?.id'
+              nz-popconfirm
+              nzPopconfirmTitle='Are you sure delete this post?'
+              (nzOnConfirm)='deletePost()'
+              nzPopconfirmPlacement='topRight'
+      >
+        <i nz-icon
+           nzType='delete'></i>
+        Delete post
+      </button>
+    </div>
+    <div>
+      <button nz-button
+              class='mr-2'
+              nzType='default'
+              (click)='submit()'
+              [nzLoading]='isSaving'
+              [disabled]='fm.invalid'
+      >
+        <i nz-icon
+           nzType='save'
+           class='color-success'
+           nzTheme='outline'></i>
+        Save
+      </button>
+      <button nz-button
+              class='mr-2'
+              nzType='default'
+              (click)='saveDraft()'
+              [nzLoading]='isSavingDraft'
+              [disabled]='fm.invalid'
+      >
+        Save draft
+        <i nz-icon
+           *ngIf='post?.publish === false && post?.id'
+           [nzType]="'check-circle'"
+           [nzTheme]="'twotone'"
+           class='color-success'></i>
+      </button>
+      <button nz-button
+              class='mr-2'
+              nzType='primary'
+              (click)='publish()'
+              [disabled]='fm.invalid'
+              [nzLoading]='isPublishing'>
+        Publish
+        <i nz-icon
+           *ngIf='post?.publish === true && post?.id'
+           [nzType]="'check-circle'"
+           [nzTheme]="'twotone'"
+           [nzTwotoneColor]="'#52c41a'"></i>
+      </button>
+      <button nz-button
+              class='mr-2'
+              nzType='primary'
+              [disabled]='fm.invalid'
+              (click)='preview()'>Preview
+      </button>
+    </div>
+  </div>
 
-{{ fm.value | json }}
+  <nz-divider></nz-divider>
+
+  <form [formGroup]='fm'
+        nz-form
+        nzLayout='vertical'>
+    <nz-form-item>
+      <nz-form-label nzFor='title'
+                     nzRequired>Title
+      </nz-form-label>
+      <nz-form-control nzHasFeedback
+                       nzErrorTip='Input is required'>
+        <input nz-input
+               placeholder='Title'
+               formControlName='title' />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzFor='minutesRead'
+                     nzRequired>Minutes Read
+      </nz-form-label>
+      <nz-form-control nzHasFeedback
+                       nzErrorTip='Input is required'>
+        <nz-input-number formControlName='minutesRead'
+                         [nzMin]='1'
+                         [nzMax]='100'
+                         [nzStep]='1'></nz-input-number>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control>
+        <label nz-checkbox
+               formControlName='publish'>Publish</label>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzFor='content'
+                     nzRequired>Content
+      </nz-form-label>
+      <nz-form-control nzHasFeedback
+                       nzErrorTip='Input is required'>
+        <editor
+          apiKey='dfurgwkncazgwgn29dwwruuzipt5wn31avynm8sv2qtv4lpf'
+          formControlName='content'
+          [init]='tinymceOptions'
+        ></editor>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+
+  {{ fm.value | json }}
+</nz-spin>

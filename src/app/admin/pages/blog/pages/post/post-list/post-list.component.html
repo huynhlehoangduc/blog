@@ -3,6 +3,7 @@
      nz-button
      nzSize='default'
      nzType='primary'>
+    <i nz-icon nzType="file-add" nzTheme="outline"></i>
     Create Post
   </a>
 </div>
@@ -19,11 +20,12 @@
 >
   <thead>
   <tr>
-    <th nzColumnKey='actions'>Actions</th>
+    <th nzColumnKey='actions'
+        style='width: 10rem; max-width: 10rem'>Actions</th>
     <th nzColumnKey='title'
-        [nzSortFn]='true'>title
+        [nzSortFn]='true'
+        style='width: 30rem; max-width: 30rem'>title
     </th>
-    <th nzColumnKey='content'>content</th>
     <th nzColumnKey='minutesRead'
         [nzSortFn]='true'>minutesRead
     </th>
@@ -31,18 +33,30 @@
   </thead>
   <tbody>
   <tr *ngFor='let post of posts'>
-    <td>
+    <td style='width: 10rem; max-width: 10rem'>
       <button nz-button
               nzDanger
               nzShape='circle'
-              (click)='delete(post.id)'
+              class='mr-2'
+              nz-popconfirm
+              nzPopconfirmTitle="Are you sure delete this post?"
+              (nzOnConfirm)="delete(post.id)"
+              nzPopconfirmPlacement="topRight"
       >
         <i nz-icon
            nzType='delete'></i>
       </button>
+      <a nz-button
+         nzType='primary'
+         nzShape='circle'
+         [routerLink]="['/admin/post-edit']" [queryParams]='{id: post.id}'
+      >
+        <i nz-icon
+           nzType='edit'
+           nzTheme='outline'></i>
+      </a>
     </td>
-    <td>{{ post.title }}</td>
-    <td>{{ post.content }}</td>
+    <td style='width: 30rem; max-width: 30rem'>{{ post.title }}</td>
     <td>{{ post.minutesRead }}</td>
   </tr>
   </tbody>

@@ -10,10 +10,20 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { UnorderedListOutline } from '@ant-design/icons-angular/icons';
+import { EditorModule } from '@tinymce/tinymce-angular';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import {
+  UnorderedListOutline,
+  CheckCircleTwoTone,
+  FileAddOutline,
+  DeleteOutline,
+  SaveOutline
+} from '@ant-design/icons-angular/icons';
 
 
-const icons = [UnorderedListOutline];
+const icons = [UnorderedListOutline, CheckCircleTwoTone, FileAddOutline, DeleteOutline, SaveOutline];
 
 @NgModule({
   declarations: [
@@ -29,6 +39,10 @@ const icons = [UnorderedListOutline];
     NzFormModule,
     NzButtonModule,
     NzInputNumberModule,
+    EditorModule,
+    NzSpinModule,
+    NzDividerModule,
+    NzPopconfirmModule,
   ],
 })
 export class PostEditModule { }

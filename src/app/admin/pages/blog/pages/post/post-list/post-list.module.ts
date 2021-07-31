@@ -6,9 +6,10 @@ import { PostListComponent } from './post-list.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { DeleteOutline } from '@ant-design/icons-angular/icons';
+import { DeleteOutline, FileAddOutline } from '@ant-design/icons-angular/icons';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
-const icons = [DeleteOutline];
+const icons = [DeleteOutline, FileAddOutline];
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ const icons = [DeleteOutline];
     NzTableModule,
     NzButtonModule,
     NzIconModule.forChild(icons),
+    NzPopconfirmModule,
   ],
 })
 export class PostListModule { }

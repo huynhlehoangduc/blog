@@ -19,11 +19,19 @@ export class PostService {
     return this.httpClient.get<PaginationResponse<Post>>(`${environment.apiUrl}/${this.ENDPOINT}`, options);
   }
 
-  delete(id: string) {
+  delete(id: string): Observable<unknown> {
     return this.httpClient.delete(`${environment.apiUrl}/${this.ENDPOINT}/${id}`);
   }
 
   create(payload, options = {}): Observable<Post> {
     return this.httpClient.post(`${environment.apiUrl}/${this.ENDPOINT}`, payload, options)
+  }
+
+  update(id: string, payload, options = {}): Observable<Post> {
+    return this.httpClient.put(`${environment.apiUrl}/${this.ENDPOINT}/${id}`, payload, options)
+  }
+
+  getOne(id: string): Observable<Post> {
+    return this.httpClient.get(`${environment.apiUrl}/${this.ENDPOINT}/${id}`);
   }
 }

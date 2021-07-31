@@ -25,7 +25,6 @@ export class PostListComponent implements OnInit {
   }
 
   onQueryParamsChange(params: NzTableQueryParams) {
-    console.log(params);
     const { pageSize, pageIndex, sort, filter } = params;
     const currentSort = sort.find(item => item.value !== null);
     const sortField = (currentSort && currentSort.key) || null;
