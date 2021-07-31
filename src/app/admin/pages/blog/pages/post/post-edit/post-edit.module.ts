@@ -21,6 +21,7 @@ import {
   DeleteOutline,
   SaveOutline
 } from '@ant-design/icons-angular/icons';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 
 
 const icons = [UnorderedListOutline, CheckCircleTwoTone, FileAddOutline, DeleteOutline, SaveOutline];
@@ -43,6 +44,7 @@ const icons = [UnorderedListOutline, CheckCircleTwoTone, FileAddOutline, DeleteO
     NzSpinModule,
     NzDividerModule,
     NzPopconfirmModule,
+    NzUploadModule,
   ],
 })
 export class PostEditModule { }

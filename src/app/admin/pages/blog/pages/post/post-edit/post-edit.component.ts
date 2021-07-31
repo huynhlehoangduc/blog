@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostService } from '../../../@core/services/post.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from '../../../@core/interfaces/post';
+import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
+import { environment } from '../../../../../../../environments/environment';
+import { FileManagementService } from '../../../../../@core/services/file-management.service';
+import { S3UploadResponse } from '../../../../../../@core/interfaces/s3-upload-response';
 
 @Component({
   selector: 'app-post-edit',
@@ -13,6 +17,8 @@ import { Post } from '../../../@core/interfaces/post';
 })
 export class PostEditComponent implements OnInit {
 
+  POST_S3_ENDPOINT = `${environment.apiUrl}/${this.fileManagementService.API_ENDPOINT}/post-img-s3`;
+
   fm!: FormGroup;
   post: Post = null;
 
@@ -21,31 +27,21 @@ export class PostEditComponent implements OnInit {
   isPublishing: boolean = false;
   isSpinning: boolean = false;
   isDeletingPost: boolean = false;
+  isUploadingThumbnail: boolean = false;
 
-  tinymceOptions = {
-    height: 500,
-    menubar: false,
-    plugins: [
-      "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-      "searchreplace wordcount visualblocks visualchars code fullscreen",
-      "insertdatetime media nonbreaking save table directionality",
-      "emoticons template paste textpattern"
-    ],
-    toolbar:
-      'formatselect | bold italic underline | link image | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | removeformat fullscreen',
-    statusbar: false,
-    paste_data_images: true,
-    image_title: true,
-  };
+  @ViewChild('tinymce') tinymce;
+  tinymceOptions;
 
   constructor(private readonly fb: FormBuilder,
               private readonly postService: PostService,
               private readonly notification: NzNotificationService,
               private readonly activatedRoute: ActivatedRoute,
-              private readonly router: Router) { }
+              private readonly router: Router,
+              private readonly fileManagementService: FileManagementService) { }
 
   ngOnInit(): void {
     this.initForm();
+    this.initTinyMCEOption();
     this.activatedRoute.queryParams.subscribe(queryParams => {
       if (queryParams.id) {
         this.isSpinning = true;
@@ -53,7 +49,7 @@ export class PostEditComponent implements OnInit {
           this.isSpinning = false;
           this.post = post;
           this.fm.patchValue(post);
-        }, error => this.isSpinning = false);
+        }, _ => this.isSpinning = false);
       } else {
         this.post = null;
         this.isSpinning = true;
@@ -130,7 +126,7 @@ export class PostEditComponent implements OnInit {
           this.post = post;
           void this.router.navigate(['/admin/post-edit'], { queryParams: { id: post.id } })
         },
-        error => {
+        _ => {
           this.isSavingDraft = false;
         })
     }
@@ -148,6 +144,63 @@ export class PostEditComponent implements OnInit {
       );
       void this.router.navigate(['/admin/post-list']);
     },
-      error => this.isDeletingPost = false);
+      _ => this.isDeletingPost = false);
+  }
+
+  handleChangeThumbNail(info: NzUploadChangeParam): void {
+    switch (info.file.status) {
+      case 'uploading':
+        this.isUploadingThumbnail = true;
+        break;
+      case 'done':
+        const response: S3UploadResponse = info.file.response;
+        this.fm.patchValue({ thumbnail: response.Location });
+        this.isUploadingThumbnail = false;
+        break;
+      case 'error':
+        this.isUploadingThumbnail = false;
+        break;
+    }
+  }
+
+  private initTinyMCEOption() {
+    this.tinymceOptions = {
+      height: 500,
+      menubar: false,
+      plugins: [
+        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime media nonbreaking save table directionality",
+        "emoticons template paste textpattern"
+      ],
+      toolbar:
+        'formatselect | bold italic underline | link image | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | removeformat fullscreen',
+      statusbar: false,
+      paste_data_images: true,
+      image_title: true,
+      images_upload_handler: (blobInfo, success, failure) => {
+        const formData = new FormData();
+        formData.append('file', blobInfo.blob(), blobInfo.blob().filename);
+        const self = this;
+        // REF: https://youtu.be/wNqwExw-ECw
+        self.fileManagementService.postImgS3(formData).subscribe(
+          (res: S3UploadResponse) => {
+            /*console.log('tinymce res: ', res);
+            const json = JSON.parse(JSON.stringify(res));*/
+            success(res.Location);
+          }, (err) => {
+            if (err.status !== 200) {
+              self.tinymce.editor.notificationManager.open({
+                text: 'HTTP Error: ' + err.status,
+                type: 'error',
+                timeout: 5000,
+                closeButton: true
+              });
+              return;
+            }
+          });
+
+      }
+    };
   }
 }

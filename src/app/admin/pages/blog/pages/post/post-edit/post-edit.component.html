@@ -120,12 +120,33 @@
     </nz-form-item>
 
     <nz-form-item>
+      <nz-form-control>
+        <nz-upload
+          class="avatar-uploader"
+          [nzAction]="POST_S3_ENDPOINT"
+          nzName="file"
+          nzListType="picture-card"
+          [nzShowUploadList]="false"
+          (nzChange)="handleChangeThumbNail($event)"
+        >
+          <nz-spin [nzSpinning]='isUploadingThumbnail'>
+            <ng-container *ngIf="!fm.value.thumbnail">
+              <div class="ant-upload-text">Upload</div>
+            </ng-container>
+            <img *ngIf="fm.value.thumbnail" [src]="fm.value.thumbnail" style="width: 100%" />
+          </nz-spin>
+        </nz-upload>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
       <nz-form-label nzFor='content'
                      nzRequired>Content
       </nz-form-label>
       <nz-form-control nzHasFeedback
                        nzErrorTip='Input is required'>
         <editor
+          #tinymce
           apiKey='dfurgwkncazgwgn29dwwruuzipt5wn31avynm8sv2qtv4lpf'
           formControlName='content'
           [init]='tinymceOptions'
