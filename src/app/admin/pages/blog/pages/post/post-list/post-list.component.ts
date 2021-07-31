@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PostService } from '../../@core/services/post.service';
-import { PaginationResponse } from '../../../../../@core/interfaces/pagination-response';
-import { Post } from '../../@core/interfaces/post';
+import { PostService } from '../../../@core/services/post.service';
+import { PaginationResponse } from '../../../../../../@core/interfaces/pagination-response';
+import { Post } from '../../../@core/interfaces/post';
 import { Observable } from 'rxjs';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 
