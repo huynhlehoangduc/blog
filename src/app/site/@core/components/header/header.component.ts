@@ -5,16 +5,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log('Header Init');
-  }
-
-  ngOnDestroy() {
-    console.log('Header Destroy');
   }
 
 }

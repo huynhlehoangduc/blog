@@ -1,25 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { BlogRoutingModule } from './blog-routing.module';
-import { BlogComponent } from './blog.component';
+import { HomeRoutingModule } from './home-routing.module';
+import { HomeComponent } from './home.component';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { FooterModule } from '../../@core/components/footer/footer.module';
 import { HeaderModule } from '../../@core/components/header/header.module';
+import { FooterModule } from '../../@core/components/footer/footer.module';
 
 
 @NgModule({
   declarations: [
-    BlogComponent
+    HomeComponent
   ],
   imports: [
     CommonModule,
-    BlogRoutingModule,
+    HomeRoutingModule,
+    HeaderModule,
+    FooterModule,
     NzInputModule,
     NzIconModule,
-    FooterModule,
-    HeaderModule,
   ],
 })
-export class BlogModule { }
+export class HomeModule { }
