@@ -1,1 +1,51 @@
-<a routerLink='blog'>Detail Route</a>
+<nz-input-group [nzSuffix]='suffixIconSearch'>
+  <input type='text'
+         nz-input
+         placeholder='input search text' />
+</nz-input-group>
+<ng-template #suffixIconSearch>
+  <i nz-icon
+     nzType='search'></i>
+</ng-template>
+
+<nz-list nzItemLayout='vertical'>
+  <nz-list-item *ngFor='let post of posts'>
+    <nz-list-item-extra>
+      <img width='272'
+           alt='logo'
+           [src]='post.thumbnail' />
+    </nz-list-item-extra>
+    <nz-list-item-meta>
+      <!--<nz-list-item-meta-avatar [nzSrc]='item.avatar'></nz-list-item-meta-avatar>-->
+      <nz-list-item-meta-title>
+        <a class='text-3xl font-bold' [routerLink]="['/post', post.id]">{{ post.title }}</a>
+      </nz-list-item-meta-title>
+      <nz-list-item-meta-description>
+        <span>{{ post.publishAt }}</span> - <span>{{ post.minutesRead }} minutes</span> - <span>{{ post.author }}</span>
+      </nz-list-item-meta-description>
+    </nz-list-item-meta>
+    Description
+    <!--<ul nz-list-item-actions>
+      <nz-list-item-action>
+        <i nz-icon
+           nzType='star-o'
+           style='margin-right: 8px;'></i>
+        2
+      </nz-list-item-action>
+    </ul>-->
+  </nz-list-item>
+
+  <br>
+
+  <nz-pagination [nzPageIndex]='pageIndex'
+                 [nzTotal]='totalCount'
+                 [nzPageSize]='pageSize'
+                 (nzPageSizeChange)='changePageSize($event)'
+                 (nzPageIndexChange)='changePageIndex($event)'
+                 [nzShowTotal]='rangeTemplate'></nz-pagination>
+  <ng-template #rangeTemplate
+               let-range='range'
+               let-total>
+    {{ range[0] }}-{{ range[1] }} of {{ total }} items
+  </ng-template>
+</nz-list>

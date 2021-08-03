@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostService } from '../../../@core/services/post.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Post } from '../../../@core/interfaces/post';
+import { Post } from '../../../../../../@core/interfaces/post';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { environment } from '../../../../../../../environments/environment';
 import { FileManagementService } from '../../../../../@core/services/file-management.service';
