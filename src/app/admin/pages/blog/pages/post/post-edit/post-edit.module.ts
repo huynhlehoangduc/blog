@@ -14,17 +14,8 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
-import {
-  UnorderedListOutline,
-  CheckCircleTwoTone,
-  FileAddOutline,
-  DeleteOutline,
-  SaveOutline
-} from '@ant-design/icons-angular/icons';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 
-
-const icons = [UnorderedListOutline, CheckCircleTwoTone, FileAddOutline, DeleteOutline, SaveOutline];
 
 @NgModule({
   declarations: [
@@ -34,7 +25,6 @@ const icons = [UnorderedListOutline, CheckCircleTwoTone, FileAddOutline, DeleteO
     CommonModule,
     PostEditRoutingModule,
     ReactiveFormsModule,
-    NzIconModule.forChild(icons),
     NzInputModule,
     NzCheckboxModule,
     NzFormModule,
@@ -45,6 +35,7 @@ const icons = [UnorderedListOutline, CheckCircleTwoTone, FileAddOutline, DeleteO
     NzDividerModule,
     NzPopconfirmModule,
     NzUploadModule,
+    NzIconModule
   ],
 })
 export class PostEditModule { }

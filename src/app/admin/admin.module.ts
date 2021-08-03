@@ -7,9 +7,6 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { DashboardOutline, MenuFoldOutline, MenuUnfoldOutline } from '@ant-design/icons-angular/icons';
-
-const icons = [DashboardOutline, MenuFoldOutline, MenuUnfoldOutline];
 
 @NgModule({
   declarations: [
@@ -21,7 +18,7 @@ const icons = [DashboardOutline, MenuFoldOutline, MenuUnfoldOutline];
     NzLayoutModule,
     NzMenuModule,
     NzBreadCrumbModule,
-    NzIconModule.forChild(icons),
+    NzIconModule,
   ],
 })
 export class AdminModule { }

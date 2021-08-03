@@ -10,8 +10,32 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+
+import {
+  DeleteOutline,
+  FileAddOutline,
+  UnorderedListOutline,
+  CheckCircleTwoTone,
+  SaveOutline,
+  SearchOutline,
+  DashboardOutline,
+  MenuFoldOutline,
+  MenuUnfoldOutline,
+} from '@ant-design/icons-angular/icons';
 
 registerLocaleData(en);
+const icons = [
+  UnorderedListOutline,
+  CheckCircleTwoTone,
+  FileAddOutline,
+  DeleteOutline,
+  SaveOutline,
+  SearchOutline,
+  DashboardOutline,
+  MenuFoldOutline,
+  MenuUnfoldOutline
+];
 
 @NgModule({
   declarations: [
@@ -24,6 +48,7 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     NzButtonModule,
+    NzIconModule.forRoot(icons)
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],
