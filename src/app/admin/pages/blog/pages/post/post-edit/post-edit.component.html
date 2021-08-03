@@ -106,7 +106,8 @@
 
         <div nz-row
              nzGutter='24'>
-          <div nz-col nzSpan='12'>
+          <div nz-col
+               nzSpan='12'>
             <nz-form-item>
               <nz-form-label nzFor='minutesRead'
                              nzRequired>Minutes Read
@@ -121,14 +122,29 @@
               </nz-form-control>
             </nz-form-item>
           </div>
-          <div nz-col nzSpan='12'>
+          <div nz-col
+               nzSpan='12'>
             <nz-form-item>
               <nz-form-control>
                 <label nz-checkbox
                        formControlName='publish'>Publish</label>
               </nz-form-control>
-            </nz-form-item></div>
+            </nz-form-item>
+          </div>
         </div>
+
+        <nz-form-item>
+          <nz-form-label nzFor='description'
+                         nzRequired>Description
+          </nz-form-label>
+          <nz-form-control nzHasFeedback
+                           nzErrorTip='Input is required'>
+            <textarea nz-input
+                      rows='4'
+                      placeholder='Description'
+                      formControlName='description'></textarea>
+          </nz-form-control>
+        </nz-form-item>
       </div>
       <div nz-col
            nzSpan='12'>

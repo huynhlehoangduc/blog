@@ -8,6 +8,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { TruncateModule } from '../../../../../../@core/pipes/truncate/truncate.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NzImageModule } from 'ng-zorro-antd/image';
     NzButtonModule,
     NzPopconfirmModule,
     NzImageModule,
-    NzIconModule
+    NzIconModule,
+    TruncateModule,
   ],
 })
 export class PostListModule { }

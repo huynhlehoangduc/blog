@@ -59,6 +59,7 @@ export class PostEditComponent implements OnInit {
           minutesRead: null,
           thumbnail: '',
           publish: false,
+          description: '',
         });
         setTimeout(_ => this.isSpinning = false, 100);
       }
@@ -70,6 +71,7 @@ export class PostEditComponent implements OnInit {
       title: this.fb.control(post ? post.title : '', Validators.required),
       content: this.fb.control(post ? post.content :'', Validators.required),
       minutesRead: this.fb.control(post ? post.minutesRead : null, Validators.required),
+      description: this.fb.control(post ? post.description : null, Validators.required),
       thumbnail: this.fb.control(post ? post.thumbnail : ''),
       publish: this.fb.control(post ? post.publish : false),
     });

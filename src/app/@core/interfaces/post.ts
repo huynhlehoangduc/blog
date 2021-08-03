@@ -9,4 +9,5 @@ export interface Post {
   author?: string;
   minutesRead?: number;
   thumbnail?: string;
+  description?: string;
 }

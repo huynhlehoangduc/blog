@@ -35,6 +35,10 @@
     <th nzColumnKey='minutesRead'
         [nzSortFn]='true'>Minutes Read
     </th>
+    <th nzColumnKey='description'
+        [nzSortFn]='true'
+        style='width: 30rem; max-width: 30rem'>Description
+    </th>
   </tr>
   </thead>
   <tbody>
@@ -64,14 +68,17 @@
       </a>
     </td>
     <td style='width: 10rem; max-width: 10rem'>
-      <img nz-image
-           style='width: 5.5rem; height: 5.5rem'
-           [nzSrc]='post.thumbnail'
-           [nzFallback]="'/assets/imgs/no-img.png'"
-      />
+      <span class='w-12 h-12'>
+        <img nz-image
+             class='max-h-full max-w-full'
+             [nzSrc]='post.thumbnail'
+             [nzFallback]="'/assets/imgs/no-img.png'"
+        /></span>
+
     </td>
     <td style='width: 30rem; max-width: 30rem'>{{ post.title }}</td>
     <td>{{ post.minutesRead }}</td>
+    <td style='width: 30rem; max-width: 30rem'>{{ post.description | truncate:50 }}</td>
   </tr>
   </tbody>
 </nz-table>
