@@ -13,7 +13,8 @@ export class HomeComponent implements OnInit {
   pageSize: number = 10;
   pageIndex: number = 1;
   totalCount: number = 0;
-  loading: boolean = false;
+  loading: boolean = true;
+  skeletonItems = ['','','','','']
 
   constructor(private readonly postService: PostService) { }
 
@@ -22,10 +23,10 @@ export class HomeComponent implements OnInit {
   }
 
   loadPost(): void {
-    this.loading = true;
     this.postService.list({ params: { page: this.pageIndex, take: this.pageSize }}).subscribe(res => {
       this.posts = res.data;
       this.totalCount = res.meta.itemCount;
+      this.loading = false;
     });
   }
 

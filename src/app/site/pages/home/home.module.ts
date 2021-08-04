@@ -9,6 +9,7 @@ import { HeaderModule } from '../../@core/components/header/header.module';
 import { FooterModule } from '../../@core/components/footer/footer.module';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     NzIconModule,
     NzListModule,
     NzPaginationModule,
+    NzSkeletonModule,
   ],
 })
 export class HomeModule { }

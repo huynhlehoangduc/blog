@@ -17,4 +17,8 @@ export class PostService {
   list(options = {}): Observable<PaginationResponse<Post>> {
     return this.httpClient.get<PaginationResponse<Post>>(`${environment.apiUrl}/${this.ENDPOINT}`, options);
   }
+
+  get(id: string): Observable<Post> {
+    return this.httpClient.get<Post>(`${environment.apiUrl}/${this.ENDPOINT}/${id}`);
+  }
 }

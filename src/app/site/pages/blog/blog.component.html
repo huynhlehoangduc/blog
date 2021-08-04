@@ -1,2 +1,97 @@
-Detail <br>
-<a routerLink='/'>List</a>
+<ng-container *ngIf='post$ | async as post;else emptyBlock'>
+  <h1>{{ post.title }}</h1>
+  <p>{{ post.publishAt | date:'dd/mm/YYYY' }} - {{ post.minutesRead }} mins reads - {{ post.author }}</p>
+
+  <nz-divider></nz-divider>
+
+  <div class='content'
+       [innerHTML]='post.content'>
+  </div>
+</ng-container>
+
+<ng-template #emptyBlock>
+  <div>
+    <nz-skeleton-element
+      nzType="input"
+      [nzActive]="true"
+      [nzSize]="'large'"
+      class='w-5/12 my-2'
+    ></nz-skeleton-element>
+    <br>
+    <br>
+    <nz-skeleton-element
+      nzType="input"
+      [nzActive]="true"
+      [nzSize]="'small'"
+      class='w-full my-2'
+    ></nz-skeleton-element>
+    <nz-skeleton-element
+      nzType="input"
+      [nzActive]="true"
+      [nzSize]="'small'"
+      class='w-full my-2'
+    ></nz-skeleton-element>
+    <nz-skeleton-element
+      nzType="input"
+      [nzActive]="true"
+      [nzSize]="'small'"
+      class='w-full my-2'
+    ></nz-skeleton-element>
+    <nz-skeleton-element
+      nzType="input"
+      [nzActive]="true"
+      [nzSize]="'small'"
+      class='w-8/12 my-2 mb-4'
+    ></nz-skeleton-element>
+
+    <nz-skeleton-element
+      nzType="input"
+      [nzActive]="true"
+      [nzSize]="'small'"
+      class='w-full my-2'
+    ></nz-skeleton-element>
+    <nz-skeleton-element
+      nzType="input"
+      [nzActive]="true"
+      [nzSize]="'small'"
+      class='w-full my-2'
+    ></nz-skeleton-element>
+    <nz-skeleton-element
+      nzType="input"
+      [nzActive]="true"
+      [nzSize]="'small'"
+      class='w-full my-2'
+    ></nz-skeleton-element>
+    <nz-skeleton-element
+      nzType="input"
+      [nzActive]="true"
+      [nzSize]="'small'"
+      class='w-8/12 my-2 mb-4'
+    ></nz-skeleton-element>
+
+    <nz-skeleton-element
+      nzType="input"
+      [nzActive]="true"
+      [nzSize]="'small'"
+      class='w-full my-2'
+    ></nz-skeleton-element>
+    <nz-skeleton-element
+      nzType="input"
+      [nzActive]="true"
+      [nzSize]="'small'"
+      class='w-full my-2'
+    ></nz-skeleton-element>
+    <nz-skeleton-element
+      nzType="input"
+      [nzActive]="true"
+      [nzSize]="'small'"
+      class='w-full my-2'
+    ></nz-skeleton-element>
+    <nz-skeleton-element
+      nzType="input"
+      [nzActive]="true"
+      [nzSize]="'small'"
+      class='w-8/12 my-2'
+    ></nz-skeleton-element>
+  </div>
+</ng-template>
