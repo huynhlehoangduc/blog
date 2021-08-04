@@ -8,7 +8,7 @@ const routes: Routes = [
     component: SiteComponent,
     children: [
       { path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)},
-      { path: 'blog', loadChildren: () => import('./pages/blog/blog.module').then(m => m.BlogModule)},
+      { path: 'blog/:id', loadChildren: () => import('./pages/blog/blog.module').then(m => m.BlogModule)},
     ]
   }
 ];
