@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 export class BlogComponent implements OnInit {
 
   post$: Observable<Post>;
+  skeletonItems = ['','','','','']
 
   constructor(private readonly activatedRoute: ActivatedRoute,
               private readonly postService: PostService) { }

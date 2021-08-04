@@ -1,4 +1,6 @@
-<nz-input-group [nzSuffix]='suffixIconSearch'>
+<nz-input-group [nzSuffix]='suffixIconSearch'
+                [nzSize]="'large'"
+                class='mt4 mb-8 lg:mt-8 lg:mb-12'>
   <input type='text'
          nz-input
          placeholder='input search text' />
@@ -8,9 +10,9 @@
      nzType='search'></i>
 </ng-template>
 
-<ng-container *ngIf='loading'>
+<ng-container *ngIf='initialLoading'>
   <nz-skeleton *ngFor='let skeletonItem of skeletonItems'
-    [nzLoading]='loading'
+               [nzLoading]='initialLoading'
                [nzActive]='true'
                [nzAvatar]='true'></nz-skeleton>
 </ng-container>
