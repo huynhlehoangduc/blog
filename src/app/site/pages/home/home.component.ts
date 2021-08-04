@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../../@core/services/post.service';
 import { Post } from '../../../@core/interfaces/post';
+import { BreadcrumbService } from '../../../@core/services/breadcrumb.service';
 
 @Component({
   selector: 'app-home',
@@ -17,10 +18,12 @@ export class HomeComponent implements OnInit {
   initialLoading: boolean = true;
   skeletonItems = ['','','','','']
 
-  constructor(private readonly postService: PostService) { }
+  constructor(private readonly postService: PostService,
+              private readonly breadcrumbService: BreadcrumbService) { }
 
   ngOnInit(): void {
     this.loadPost();
+    this.breadcrumbService.setBreadcrumbItems([]);
   }
 
   loadPost(): void {

@@ -1,6 +1,25 @@
 <app-header></app-header>
 <div class='lg:w-8/12 mx-auto p-4'
      style='min-height: calc(100vh - 7.6rem);'>
+
+  <ng-container *ngIf="(url$ | async) !== '/' && router.url !== '/'">
+    <nz-breadcrumb>
+      <nz-breadcrumb-item>
+        <a routerLink='/'>Trang chủ</a>
+      </nz-breadcrumb-item>
+
+      <ng-container *ngIf='breadcrumbItems$ | async as breadcrumbItems'>
+        <nz-breadcrumb-item *ngFor='let breadcrumbItem of breadcrumbItems; trackBy: trackByItems'>
+          <ng-container *ngIf='!breadcrumbItem.url'>{{ breadcrumbItem.title }}</ng-container>
+          <ng-container *ngIf='breadcrumbItem.url'><a [routerLink]='[breadcrumbItem.url]'>{{ breadcrumbItem.title }}</a>
+          </ng-container>
+        </nz-breadcrumb-item>
+      </ng-container>
+    </nz-breadcrumb>
+
+    <br>
+  </ng-container>
+
   <router-outlet></router-outlet>
 </div>
 <app-footer></app-footer>
