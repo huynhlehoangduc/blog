@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IconModule } from './icon.module';
 import {TransferHttpCacheModule} from '@nguniversal/common';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 registerLocaleData(en);
 
@@ -27,7 +28,8 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     NzButtonModule,
     IconModule,
-    TransferHttpCacheModule
+    TransferHttpCacheModule,
+    NzSpinModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],
