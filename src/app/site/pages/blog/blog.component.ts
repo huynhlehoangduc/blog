@@ -5,6 +5,7 @@ import { Post } from '../../../@core/interfaces/post';
 import { PostService } from '../../@core/services/post.service';
 import { Observable } from 'rxjs';
 import { BreadcrumbService } from '../../../@core/services/breadcrumb.service';
+import { SeoService } from '../../../@core/services/seo.service';
 
 @Component({
   selector: 'app-blog',
@@ -19,13 +20,22 @@ export class BlogComponent implements OnInit {
 
   constructor(private readonly activatedRoute: ActivatedRoute,
               private readonly postService: PostService,
-              private readonly breadcrumbService: BreadcrumbService) { }
+              private readonly breadcrumbService: BreadcrumbService,
+              private readonly seoService: SeoService) { }
 
   ngOnInit(): void {
     this.post$ = this.activatedRoute.params.pipe(
       map(params => params.id),
       switchMap(id => this.postService.get(id)),
-      tap(post => this.breadcrumbService.setBreadcrumbItems([{ title: post.title }]))
+      tap(post => {
+        this.breadcrumbService.setBreadcrumbItems([{ title: post.title }]);
+        this.seoService.setData({
+          title: post.title,
+          description: post.description,
+          /*published: post.publishAt,
+          author: post.author,*/
+        });
+      })
     )
   }
 }
