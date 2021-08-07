@@ -14,6 +14,7 @@ import { IconModule } from './icon.module';
 import {TransferHttpCacheModule} from '@nguniversal/common';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { ResponseHandlerInterceptor } from './@core/interceptors/response-handler.interceptor';
+import { AdminInterceptor } from './@core/interceptors/admin.interceptor';
 
 registerLocaleData(en);
 
@@ -39,6 +40,7 @@ registerLocaleData(en);
       useClass: ResponseHandlerInterceptor,
       multi: true,
     },
+    { provide: HTTP_INTERCEPTORS, useClass: AdminInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

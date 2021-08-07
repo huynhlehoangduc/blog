@@ -20,5 +20,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzBreadCrumbModule,
     NzIconModule,
   ],
+  providers: []
 })
 export class AdminModule { }

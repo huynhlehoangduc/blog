@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { AuthService } from '../services/auth.service';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,6 @@ export class AdminGuard implements CanActivate {
     return this.authService
     .me(token)
     .pipe(
-      tap(_ => console.log(_)),
       map(_ => true),
       catchError(_ => {
         void this.router.navigate(['/admin-login']);
