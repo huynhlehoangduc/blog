@@ -14,7 +14,6 @@ export class AdminInterceptor implements HttpInterceptor {
   constructor(private readonly authService: AuthService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    debugger;
     const token = this.authService.getToken()?.accessToken;
 
     if (token) {
