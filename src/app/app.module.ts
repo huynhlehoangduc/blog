@@ -7,12 +7,13 @@ import { en_US, NZ_I18N } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IconModule } from './icon.module';
 import {TransferHttpCacheModule} from '@nguniversal/common';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { ResponseHandlerInterceptor } from './@core/interceptors/response-handler.interceptor';
 
 registerLocaleData(en);
 
@@ -31,7 +32,14 @@ registerLocaleData(en);
     TransferHttpCacheModule,
     NzSpinModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ResponseHandlerInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {
