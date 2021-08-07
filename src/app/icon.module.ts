@@ -10,7 +10,9 @@ import {
   SaveOutline,
   SearchOutline,
   UnorderedListOutline,
-  StarOutline
+  StarOutline,
+  LockOutline,
+  UserOutline
 } from '@ant-design/icons-angular/icons';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
@@ -25,7 +27,9 @@ const icons = [
   DashboardOutline,
   MenuFoldOutline,
   MenuUnfoldOutline,
-  StarOutline
+  StarOutline,
+  LockOutline,
+  UserOutline
 ];
 
 @NgModule({
